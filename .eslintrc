@@ -1,0 +1,24 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "semi": ["error", "never"],
+    "react/jsx-filename-extension": 0,
+    "react/forbid-prop-types": 0
+  },
+  "globals": {
+    "describe": false,
+    "jest": false,
+    "it": false,
+    "expect": false,
+    "before": false,
+    "after": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "assert": false,
+    "Feature": false,
+    "Scenario": false,
+    "document": false,
+    "fetch": false,
+    "window": false
+  }
+}
