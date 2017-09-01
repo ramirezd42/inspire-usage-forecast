@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "express": "^4.15.3",
-    "forever": "^0.15.3"
+    "forever": "^0.15.3",
+    "node-zillow": "^1.0.1"
   },
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.1.0",
+    "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-import-resolver-node": "^0.3.1",
@@ -27,7 +29,6 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "mocha": "^3.4.2",
-    "nock": "^9.0.14",
     "nodemon": "^1.11.0",
     "supertest": "^3.0.0"
   }

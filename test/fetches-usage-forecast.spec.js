@@ -1,35 +1,38 @@
-const request = require('supertest')
-const server = require('../app/server')
-const { expect } = require('chai')
+ require('dotenv').config()
 
-let app
+ const request = require('supertest')
+ const { expect } = require('chai')
 
-describe('fetching usage forecast', () => {
-  beforeEach((done) => {
-    app = server.listen(1234, done)
-  })
-  afterEach(() => {
-    app.close()
-  })
+ const server = require('../app/server')
 
-  it('was succesful', (done) => {
-    const street = '30 Reading Ave'
-    const city = 'Yardley'
-    const state = 'PA'
-    const zip = '19067'
+ let app
 
-    const expectedResponse = {
-      zid: '12312312',
-      forecasted_usage: '1200',
-    }
+ describe('fetching usage forecast', () => {
+   beforeEach((done) => {
+     app = server.listen(1234, done)
+   })
+   afterEach(() => {
+     app.close()
+   })
 
-    request(app)
+   it('was succesful', (done) => {
+     const address = '2833 Miriam Ave'
+     const city = 'Roslyn'
+     const state = 'PA'
+     const zip = '19001'
+
+     const expectedResponse = {
+       zid: '9901059',
+       forecasted_usage: 1250,
+     }
+
+     request(app)
       .get('/api/forecast')
-      .query({ street, city, state, zip })
+      .query({ address, city, state, zip })
       .expect(200, done)
       .expect((res) => {
         expect(res.body).to.deep.equal(expectedResponse)
       })
       .expect('content-type', /json/)
-  })
-})
+   })
+ })
