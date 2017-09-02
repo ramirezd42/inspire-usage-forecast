@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "express": "^4.15.3",
+    "express-validator": "^4.1.0",
     "forever": "^0.15.3",
     "node-zillow": "^1.0.1"
   },

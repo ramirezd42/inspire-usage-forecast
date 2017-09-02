@@ -35,4 +35,32 @@
       })
       .expect('content-type', /json/)
    })
+
+   it('requires an address', (done) => {
+     request(app)
+      .get('/api/forecast')
+      .query({ city: 'foo', state: 'bar', zip: 'baz' })
+      .expect(400, done)
+   })
+
+   it('requires a city', (done) => {
+     request(app)
+      .get('/api/forecast')
+      .query({ address: 'foo', state: 'bar', zip: 'baz' })
+      .expect(400, done)
+   })
+
+   it('requires a state', (done) => {
+     request(app)
+      .get('/api/forecast')
+      .query({ address: 'foo', city: 'bar', zip: 'baz' })
+      .expect(400, done)
+   })
+
+   it('requires a zip', (done) => {
+     request(app)
+      .get('/api/forecast')
+      .query({ address: 'foo', city: 'bar', state: 'baz' })
+      .expect(400, done)
+   })
  })
