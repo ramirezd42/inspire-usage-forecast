@@ -25,6 +25,7 @@ const fetchPropertyDetails = (address, city, state, zip) =>
 const calculateUsage = (squareFeet, numRooms) => squareFeet * 0.5 + numRooms * 10
 
 module.exports = {
+  fetchPropertyId,
   fetchPropertyDetails,
   calculateUsage,
 }

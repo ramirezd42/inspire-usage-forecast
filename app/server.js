@@ -2,7 +2,8 @@ const express = require('express')
 const validator = require('express-validator')
 const validates = require('./middleware/validates')
 
-const { fetchPropertyDetails, calculateUsage } = require('./forecast.model')
+const { calculateUsage } = require('./forecast.model')
+const fetchPropertyDetails = require('./middleware/fetchPropertyDetails')
 
 const server = express()
 server.use(validator())
@@ -14,13 +15,13 @@ const validateForecast = (req) => {
   req.checkQuery('zip', 'missing address').notEmpty()
 }
 
-server.use('/api/forecast', validates([validateForecast]), (req, res) => {
-  const { address, city, state, zip } = req.query
-  return fetchPropertyDetails(address, city, state, zip)
-    .then(details => res.json({
-      forecasted_usage: calculateUsage(details.squareFeet, details.numRooms),
-      zid: details.zid,
-    }))
-})
+server.use('/api/forecast',
+  validates([validateForecast]),
+  fetchPropertyDetails,
+  (req, res) => res.json({
+    forecasted_usage: calculateUsage(req.propertyDetails.squareFeet, req.propertyDetails.numRooms),
+    zid: req.propertyDetails.zid,
+  }),
+)
 
 module.exports = server
