@@ -36,6 +36,30 @@
       .expect('content-type', /json/)
    })
 
+   it('returns 404 if property id is not found', (done) => {
+     const address = '123 Moon St'
+     const city = 'The Moon'
+     const state = 'Space'
+     const zip = '00000'
+
+     request(app)
+     .get('/api/forecast')
+     .query({ address, city, state, zip })
+     .expect(404, done)
+   })
+
+   it('returns 404 if property details are not found', (done) => {
+     const address = '30 Reading Ave'
+     const city = 'Yardley'
+     const state = 'PA'
+     const zip = '19067'
+
+     request(app)
+     .get('/api/forecast')
+     .query({ address, city, state, zip })
+     .expect(404, done)
+   })
+
    it('requires an address', (done) => {
      request(app)
       .get('/api/forecast')
