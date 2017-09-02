@@ -1,12 +1,14 @@
 const express = require('express')
 const validator = require('express-validator')
 const validates = require('./middleware/validates')
+const logging = require('./middleware/logging')
 
 const { calculateUsage } = require('./forecast.model')
 const fetchPropertyDetails = require('./middleware/fetchPropertyDetails')
 
 const server = express()
 server.use(validator())
+server.use(logging)
 
 const validateForecast = (req) => {
   req.checkQuery('address', 'missing address').notEmpty()
